@@ -1,21 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+import {Header} from 'react-native-elements';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import FacebookPage from './screens/FacebookPage'
+import InstagramPage from './screens/InstagramPage'
+import {createAppContainer} from 'react-navigation';
+import {createBottomTabNavigator} from 'react-navigation-tabs'
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider style = {styles.container}>
+      <Header
+      backgroundColor ={'#322e2f'}
+      centerComponent={{text:'Buzz App',style:{color:'#ffffff', fontSize:20,fontWeight:'bolder'}}}
+      />
+      <AppContainer/>
+    </SafeAreaProvider>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+ container:{
+   flex:1,
+   textAlign:'center'  
+ }
 });
+
+const TabNavigator = createBottomTabNavigator({
+  Facebook:{screen:FacebookPage},
+  Instagram:{screen:InstagramPage}
+})
+
+const AppContainer = createAppContainer(TabNavigator);
+
+
